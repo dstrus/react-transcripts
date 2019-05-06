@@ -29,7 +29,7 @@ With Outlook Web Access for Exchange Server 2000, Microsoft introduced a really 
 
 A few years later, Jesse James Garrett of Adaptive Path wrote a paper describing a model for developing applications with XHR. He gave it a catchy name...
 
-Ajax! Asynchonous JavaScript and XML.
+Ajax! Asynchronous JavaScript and XML.
 
 At last, we could load new data without reloading the entire page. As the X in Ajax and the X in XHR suggest, the idea was to load XML, but there was nothing about the implementation that _required_ you to use XML. And XML is a real pain to transform into HTML, so that made the next step, rendering data, a pretty nasty job.
 
