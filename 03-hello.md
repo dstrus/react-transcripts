@@ -48,7 +48,7 @@ Item 1 on our list is an empty element. We'll put that in the body, and although
 </body>
 ```
 
-Next, we need React itself. We'll load a development build from a CDN. The difference between this file, `react.development.js` and the production build, `react.min.js`, is that the production build has been minified. That is, it's been processed to make the file absolutely as small as possible. That's great for production, because it will save bandwidth and make things faster, but it does make the source code nearly impossible to read. Just in case we want to dig into React's source code, we'll use the development version.
+Next, we need React itself. We'll load a development build from a CDN. The difference between this file, `react.development.js` and the production build, `react.min.js`, is that the production build has been minified. That is, it's been processed to make the file absolutely as small as possible. That's great for production, because it will save bandwidth and make things faster, but it does make the source code nearly impossible to read. Just in case we want to dig into React's source code, we'll use the development version. The development version also gives us better error messages.
 
 ```html
 <body>
