@@ -169,61 +169,62 @@ Now we just need to make the button actually call that. So add our `onClick`—c
 
 Let's try it out. All right, it changes it back to `5`. Cool.
 
-Now we only want to show this button if the count has changed from its initial value. There are lots of ways of doing this. This is called **conditional rendering**. That's another thing you could look up in the documentation: [Conditional Rendering](https://reactjs.org/docs/conditional-rendering.html). There are lots and lots of ways to do this. We'll just look at one. We'll do it inline using `&&`.
+Now we only want to show this button if the count has changed from its initial value. There are lots of ways of doing this. This is called **conditional rendering**. That's another thing you could look up in the documentation: [Conditional Rendering](https://reactjs.org/docs/conditional-rendering.html). There are lots and lots of ways to do this. We'll just look at one, and I'm going to start keeping my code and my browser side-by-side like this. I think that'll make things a little simpler for us.
 
-You know the trick to do an `if` using `&&`? Let's try it out. We can put any JavaScript expression in the middle of our JSX by surrounding it in curly braces, so let me put curly braces around this `div`.
-
-```js
-<div>
-  <button onClick={this.handleDecrement}>decrement (-)</button>
-  <span className={countClassName}>{this.state.count}</span>
-  <button onClick={this.handleIncrement}>increment (+)</button>
-  {
-    <div>
-      <button onClick={this.resetCount}>reset</button>
-    </div>
-  }
-</div>
-```
-
-And what I'm going to do is put my condition—so, the circumstances under which I want to show it, I want to show it if the current count is different from the initial count—if it has ever _changed_. Well, we could say `this.state.count !== this.props.initialCount`, and that works as long as we had that prop, right? So this is the condition, and then I put `&&`, and then this is a multi-line JSX expression, so it needs to be in parentheses. Put parentheses here, and go ahead and indent this.
+So, under what conditions do we want the button to show? If `this.state.count` is not equal to `this.props.initialCount`, right? That'll work, as long as I'm passing in that prop down here, which I am at the moment. So let's start there.
 
 ```js
-  {
-    (this.state.count !== this.props.initialCount) && (
-      <div>
-        <button onClick={this.resetCount}>reset</button>
-      </div>
-    )
-  }
-```
+if (this.state.count !== this.props.initialCount) {
 
-There we go. What this expression will do is check this condition. If it's `false`, that's the end, and this expression will render nothing. If the condition is `true`, however, it'll check the right side of the `&&`, which will be a JSX expression, so this expression inside curly braces will evaluate to this JSX, and we'll see the button on the page. See if this works.
-
-OK, I don't see the button. I change the value, and the button shows up. I go back to my initial value, and it disappears again. Cool.
-
-But if we didn't pass in the `initialCount` prop, this isn't going to work, is it? So what we could do it just set a variable up here.
-
-```js
-render() {
-  const intialCount = this.props.initialCount || 0;
-  // ...
 }
 ```
 
-Let's make sure it still works with an `initialCount`. Yep, the button still shows up and does what it's supposed to. But if I stop passing in the `initialCount`, what happens? Ah, the button's there still. That didn't quite do it. That's because I didn't change my `if`. It still compares it to `this.props.initialCount`. I want to compare it to my _variable_ `initialCount`—my local variable that I set up here.
+And we're going to take advantage of the fact that you can totally save JSX elements as variables. Remember, a JSX tag is just shorthand for `React.createElement()`, so why couldn't we put the output in a variable? So let's do that.
+
+Make a variable. I'll put it outside the `if`. `let resetButton`, and I'll initialize it to an empty string. But if `this.state.count` is not equal to `this.props.initialCount`, then I'm going to set `resetButton` to... this button!
 
 ```js
-  {
-    (this.state.count !== initialCount) && (
-      <div>
-        <button onClick={this.resetCount}>reset</button>
-      </div>
-    )
-  }
+let resetButton = ''
+if (this.state.count !== initialCount) {
+  resetButton = <button onClick={this.resetCount}>reset</button>
+}
 ```
 
-Try that again. OK, no button. I change it, the button's there. I reset it, the button goes away. Cool. So that's that.
+And then down here, where I had the button, I'll just put `resetButton` inside curly braces.
+
+```js
+<div>
+  {resetButton}
+</div>
+```
+
+You can put any JavaScript expression inside curly braces, and it'll put the output here. So it'll either be empty string, or the button (we hope). Let's save that, refresh it, and see what happens.
+
+It starts out as `5`. There's no reset button. As soon as I change it, the reset button shows up. I go back, and the reset button disappears. What if I go the other direction? Yep, still works.
+
+But what happens if I don't pass in the initial count as a prop?
+
+```js
+<Counter />
+```
+
+Then the reset button is there the whole time, even though my current value is the same as the initial value, because the initial value is just zero, right? It just defaults to that. So why don't I just put a variable up here, `let initialCount = this.props.initialCount || 0`, and then use that `initalCount` variable in my comparison down here?
+
+```js
+let initialCount = this.props.initialCount || 0
+let resetButton = ''
+if (this.state.count !== initialCount) {
+  resetButton = <button onClick={this.resetCount}>reset</button>
+}
+```
+
+Try that. No button. I change it, button appears. Change it back, button disappears. So now it works if I don't pass it in. What if I pass it in again?
+
+```js
+<Counter initialCount={2} />
+```
+
+No button. Button appears. All right, I think we got it. Again, that's only one way of doing conditional rendering—a relatively straightforward way of doing it, just a simple `if` statement and a variable that is assigned a JSX element. Very good.
 
 So there is some tricky stuff in here. We learned a few new things. We learned about conditional rendering—at least one way to do it. And we learned how to apply a CSS class name using the `className` prop.
 
