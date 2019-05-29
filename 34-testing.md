@@ -6,11 +6,11 @@ If you someday work for a company with a real development team or teams, and a g
 
 For one thing, there's more than one type of testing. There's white-box testing, where you have access to the source code, and black-box testing, where you don't. And then there are different testing methodologies, like end-to-end testing, integration testing, regression testing, unit testing—they all serve specific purposes, and they can all be important in certain scenarios. Then you'll hear terms like functional testing and acceptance testing, and it doesn't help that not every developer or every organization uses all these terms exactly the same way. It can be a bit much! Well, I'm going to explain _all_ of it _right now_, in this 15-hour video! Just kidding. Fifteen hours wouldn't be enough! But we'll see if we can get a handle on _some_ of it.
 
-How about unit testing versus end-to-end testing? These are kind of opposite extremes, so it's relatively simple to explain the difference. In unit tests, you're testing the smallest possible thing you can possibly test—like a single function, all on its own. You don't worry about how that function fits together with other objects—just how that function works in isolation.
+How about unit testing versus end-to-end testing? These are kind of opposite extremes, so we ought to be able to explain the difference. In unit tests, you're testing the smallest thing you can possibly test—like a single function, all on its own. You don't worry about how that function fits together with other objects—just how that function works in isolation.
 
 On the other extreme lie end-to-end tests. These test how everything works together, how processes work end-to-end. This generally even includes testing the UI. If you have dedicated QA folks, there's a pretty high probability that they'll be doing exclusively end-to-end tests. We can still write automated end-to-end tests, but you'll always need some manual testing.
 
-What about unit tests? Making sure that each function, each class, each component, works on its own? Who's responsible for those? That is pretty much always the responsibility of the developer who wrote the code, and the tests we'll be writing in the next few videos are unit tests. So let's talk about them a bit more.
+What about unit tests? Making sure that each function, each class, each component, works on its own? Who's responsible for those? That is usually the responsibility of the developer who wrote the code, and the tests we'll be writing in the next few videos are unit tests. So let's talk about them a bit more.
 
 Sometimes, backend code is pretty heavily unit tested, while the front-end is mostly covered by end-to-end tests. But there's still value in unit testing front-end code, and we're going to learn how.
 
@@ -24,7 +24,7 @@ Let's go over what those really mean, one at a time.
 
 Unit tests test the smallest thing we can test. Something like a single component, a single class, or even a single function. In a unit test, we don't worry about how they fit together, just that they work as individual _units_, hence the name. Whatever's being tested—the individual function, class, or component—is sometimes referred to as the **unit under test**, or UUT—the thing currently being tested. I said that when you're unit testing a function, you're just concerned with how that function works in isolation. In other words, given certain input, does it produce the expected output? You'll find that testing in general is all about whether reality matches your expectations. You expect your code to produce certain output. Does it? Then the test passes.
 
-Can you see why pure functions are much easier to test that impure functions? With a pure function, you know that the output will always be the same, given the same input. That's really easy to test, because it's perfectly predictable. If your function's output is dependent on something else—like a piece of application state that isn't passed in as an argument, then your test is going to involve some additional setup to get the application into a known state—or to at least simulate the application being in a known state. That's doable, but it's messier, and it reminds me of another point...
+Can you see why pure functions are much easier to test than impure functions? With a pure function, you know that the output will always be the same, given the same input. That's really easy to test, because it's perfectly predictable. If your function's output is dependent on something else—like a piece of application state that isn't passed in as an argument, then your test is going to involve some additional setup to get the application into a known state—or to at least simulate the application being in a known state. That's doable, but it's messier, and it reminds me of another point...
 
 Unit tests require no external resources.
 
@@ -32,7 +32,7 @@ Your unit tests shouldn't rely on the availability of an external API. It should
 
 Unit tests are repeatable. You should be able to run them over and over, and, assuming that you didn't change your code, they should give the same results every time. This can be harder than it sounds. I guarantee that at some point you'll have a unit test that fails only part of the time. It'll drive you batty. But hey, it provides a strong incentive to think about how testable your code is as you're writing it.
 
-So one again, unit tests...
+So once again, unit tests...
 
 * test the smallest thing we can test
 * require no external resources
@@ -77,7 +77,7 @@ let b = 4
 let result = add(a, b)
 ```
 
-Finally: Assert. Exactly what this looks like will depend on the specific testing framework that you're using, and in particular what assertion library you're using. But you'll use some library for making assertions that throws an error if the assertion fails. Most of these libraries use one of three styles.
+Finally: Assert. Exactly what this looks like will depend on the specific testing framework that you're using, and in particular what assertion library you're using. But you'll use some library for making assertions that throws an error if the assertion fails. Most of these libraries use one of three styles: Assert, should, or expect.
 
 ```js
 // Arrange
@@ -94,7 +94,7 @@ assert.equal(result, expectedResult)
 
 Here's what it might look like with a library that uses the _assert_ style, such as Node's built-in [assert](https://nodejs.org/api/assert.html) module. Call `assert.equal()`, and pass it two values: The actual result, and the expected result. If the two arguments aren't equal, `assert.equal()` will throw an error, and the test will fail. If they're equal, it will pass.
 
-Another assertion style is the _should_ style, which you'll see in BDD—Behavior-Driven Development.
+Another assertion style is the _should_ style, which you'll see in Behavior-Driven Development, or BDD.
 
 ```js
 // Arrange
@@ -154,7 +154,7 @@ What about boundary conditions? These are those values that trigger a difference
 function isItAParty(attendees) {
   if (attendees < 5) {
     return 'Nah, more of a gathering.'
-  } elseif (attendees < 15) {
+  } else if (attendees < 15) {
     return 'Yes, a *small* party.'
   } else {
     return 'A party for sure!'
@@ -165,3 +165,5 @@ function isItAParty(attendees) {
 Here, we have three different execution paths. We want to be sure to test each path, but we also want to be careful to test the boundary conditions, so test values like 4 and 5, 14 and 15. This helps you test, for example, that you didn't use "less than" when you really meant "less than or equal to."
 
 Before we get on with writing real tests, another quick note: Tests are code, and like all other code, they, too, must be maintained. So take care when writing your tests. Use all the good habits you've developed, keep your tests DRY, etc.
+
+Next time, we'll begin actually adding tests to our application. Until then, I'm Davey Strus. Haaaappy hacking!
