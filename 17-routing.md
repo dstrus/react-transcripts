@@ -23,13 +23,15 @@ Unless you're using a very old version of `npm`, this should not only install `r
   },
 ```
 
-Sure enough. It's there.
+Sure enough. It's there. If you _don't_ see `react-router-dom` listed in your dependencies, then you have an older version of `npm`, and you need to use the `-s` command line switch when you run `npm i`. So, `npm i -s react-router-dom`, and then you should see it show up here.
 
 To use React Router, we need to wrap our `App` component in another component that we import from `react-router-dom`. In `index.js`, I need to import `BrowserRouter` from `react-router-dom`. Notice that `BrowserRouter` is in curly braces, because it's a named export from the package.
 
 ```js
 import { BrowserRouter } from 'react-router-dom';
 ```
+
+You could also import just plain `Router` from `'react-router'` instead of `BrowserRouter` from `'react-router-dom'`, but that doesn't include any of the bindings to the DOM. In other words, it won't handle the browser's history API for you automatically, and that's a big part of what we want out of our router, so we will use `BrowserRouter`.
 
 Now I'll nest the `App` component inside the `BrowserRouter` component. Having done that, let's look in the dev tools. I'll open them up with "Inspect" and switch to the "React" tab. I see a few new things in my list here—not just `BrowserRouter`, but also `Router` and `Context.Provider`. I guess it worked! Cool.
 
