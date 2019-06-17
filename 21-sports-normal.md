@@ -225,7 +225,7 @@ And it notes here:
 
 We've been doing that.
 
-So the button has to do something, so it's going to need an `onClick`, and we'll a method for that to run. Let's call it `shotHandler`. So I'll add a method called `shotHandler()`. I will use public class field syntax, so I don't have to worry about the binding of `this`. What if we just `console.log` "shoot!" when this happens?
+The button has to do something, so it's going to need an `onClick`, and we'll write a method for that to run. Let's call it `shotHandler`. So I'll add a method called `shotHandler()`. I will use public class field syntax, so I don't have to worry about the binding of `this`. What if we just `console.log` "shoot!" when this happens?
 
 ```js
 shotHandler = () => {
