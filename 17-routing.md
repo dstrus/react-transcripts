@@ -103,7 +103,11 @@ Well, guess what? Our callback receives a `props` argument. We can just pass tho
 
 Now if we find `Welcome` in the dev tools, we'll see that those three props are back, alongside the `name` prop that we added. Groovy. We can close the dev tools now.
 
-So we have three working routes. But to switch between them, we have to manually change the URL. That doesn't seem ideal. Let's add a `Navigation` component with some links for switching between those routes.
+So we have three working routes. But to switch between them, we have to manually change the URL. That doesn't seem ideal.
+
+This is a pretty common convention for the `App` component's responsibility to be defining a series of top-level routes and nothing else. Then all your main routes are in one place, and you don't have to wade through anything else to see them. That's all there is in this component.
+
+In this case, there is some navigation that we want to appear on absolutely every page, so let's add a `Navigation` component with some links for switching between those routes.
 
 We'll create a new `navigation` folder, and inside there, we'll add a new file, capital-N `Navigation.js`. This can be a functional component, so I'll import `React` from `react`, make a function named `Navigation` that receives `props` as an argument. It'll return some JSX, a `div` with a class of `Navigation`, containing the word Navigation, just so there's something on the page when I first hook it up. And then I'll export it.
 
