@@ -62,7 +62,7 @@ Next, we need React itself. We'll load a development build from a CDN. The diffe
 </body>
 ```
 
-Next, we need a renderer. Since we're running React in a web browser, as opposed to using React Native, for example, we want ReactDOM. So we'll load that from the CDN as well, and again we'll use the more readable development version.
+Next, we need a renderer. The React developers decided to separate the rendering engine from the actual React library itself. This is pretty clever, as it lets you use the same familiar syntax for creating components and managing state, while targeting a wide variety of environments. Two of the most common renderers are ReactDOM for building web apps, and React Native for building native apps for mobile devices, but there are many others. Not only can you target more environments than just those two, there are even alternative rendering engines for targeting those two. We're just building a web app, so we'll use ReactDOM. That's not the _only_ choice for web apps, but it is the most common, and it comes from Facebook, who created React. So we'll load ReactDOM from the CDN as well, and again we'll use the development version. Check out the links in this lesson if you'd like to learn more about other rendering engines.
 
 ```html
 <body>
