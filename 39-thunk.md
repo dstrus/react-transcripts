@@ -42,6 +42,8 @@ OK, that's cool and all, but we're talking about Redux middleware. Why do we nee
 
 Sometimes when we dispatch an action, we want some other stuff to happen, besides just updating the store. Redux middleware can intercept an action and do stuff before actually passing it on to the reducer. What kind of stuff? Frequently, it's asynchronous stuff like making API calls, but it could be anything. We call these things _side effects_, because it's something other than returning the new state, which is all a reducer is supposed to do. Could you just perform those side effects in the reducer? Technically there's nothing stopping you, but our lives are much easier if our reducers remain _pure_, and performing side effects would break that rule.
 
+So couldn't we perform the asynchronous operation in the component, and dispatch the action after it finishes? Again, technically, yes, there's nothing stopping you from doing that. But that's not really the component's job, and our components are much easier to reason about and test if they stick to dispatching actions and rendering.
+
 Previously, we wrote our own middleware to perform side effects, like logging or running `setInterval()`. But think about our action creators for a moment.
 
 ```js
